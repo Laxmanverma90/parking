@@ -1,0 +1,40 @@
+Tables are :
+-----------------------------------------------------------------------------------------------------------
+1. assignation
+2. daily_parking
+3. employee_registration
+4. parking
+5. parking_request
+6. release_slot
+7. role
+-----------------------------------------------------------------------------------------------------------
+
+
+ parking
+------------------
+ parking_id
+ is_reserved
+ parking_location
+ tower_name
+
+-----------------------------------------------------------------------------------------------------------
+INSERT INTO PARKING( parking_id, is_reserved, parking_location, tower_name) VALUES(1, 'false', 'P1', 'T1');
+INSERT INTO PARKING( parking_id, is_reserved, parking_location, tower_name) VALUES(2, 'false', 'P2', 'T1');
+INSERT INTO PARKING( parking_id, is_reserved, parking_location, tower_name) VALUES(3, 'false', 'P3', 'T1');
+INSERT INTO PARKING( parking_id, is_reserved, parking_location, tower_name) VALUES(4, 'false', 'P4', 'T1');
+INSERT INTO PARKING( parking_id, is_reserved, parking_location, tower_name) VALUES(5, 'false', 'P5', 'T1');
+-----------------------------------------------------------------------------------------------------------
+
+INSERT INTO ROLE ( role_id, role_name) VALUES (1, 'VIP');
+INSERT INTO ROLE ( role_id, role_name) VALUES (2, 'REGULAR');
+-----------------------------------------------------------------------------------------------------------
+
+user Resistation
+--------------------------
+{
+  "email": "laxman@hcl.com",
+  "employeeName": "Laxman",
+  "experience": 6,
+  "password": "hello",
+  "totalExperience": 16
+}
