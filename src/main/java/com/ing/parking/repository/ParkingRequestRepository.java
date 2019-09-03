@@ -17,5 +17,5 @@ public interface ParkingRequestRepository extends JpaRepository<ParkingRequest, 
 
 	List<ParkingRequest> findByEmployeeId(int employeeId);
 
-	List<ParkingRequest> findByRequestForDate(LocalDate requestDate);
+	List<ParkingRequest> findByRequestForDateAndAllotedParkingSlotId(LocalDate requestDate,int allotedParkingSlotId);
 }

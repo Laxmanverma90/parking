@@ -19,7 +19,7 @@ public class DailyParkingScheduler {
 	/**
 	 * desc : it is start the cron job for daily praking alot 
 	 */
-	@Scheduled(cron = "* 0/3 * * * *")
+	@Scheduled(cron = "10 */2 * * * *")
 	public void cronJobSch() {
 		
 		dailyParkingService.dailyParking();

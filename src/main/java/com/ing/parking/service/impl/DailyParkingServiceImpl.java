@@ -48,10 +48,11 @@ public class DailyParkingServiceImpl implements DailyParkingService {
 
 		List<Parking> parkingList = parkingRepository.findAll();
 		List<Assignation> assignatioList = assignationRepository.findAll();
-		List<ParkingRequest> parkingRequestList = parkingRequestRepository.findByRequestForDate(LocalDate.now());
+		List<ParkingRequest> parkingRequestList = parkingRequestRepository.findByRequestForDateAndAllotedParkingSlotId(LocalDate.now(), 0);
 		List<ReleaseSlot> releaseSlots = releaseRepository.findAllByBetweenDate();
 
-		Map<Integer, Integer> assignMap = assignatioList.stream().collect(Collectors.toMap(Assignation :: getParkingId, Assignation :: getEmployeeId));
+		Map<Integer, Integer> assignMap = assignatioList.stream()
+				.collect(Collectors.toMap(Assignation::getParkingId, Assignation::getEmployeeId));
 
 		List<DailyParking> dailyParkings = new ArrayList<DailyParking>();
 
@@ -64,5 +65,19 @@ public class DailyParkingServiceImpl implements DailyParkingService {
 		});
 
 		dailyParkingRepository.saveAll(dailyParkings);
+		int request = 0, requestSize =parkingRequestList.size();
+		for (ReleaseSlot releaseSlot : releaseSlots) {
+			if(request<requestSize){
+				DailyParking dailyParking = dailyParkingRepository.findByEmployeeIdAndDailyDate(releaseSlot.getEmployeeId(),
+						LocalDate.now());
+				ParkingRequest parkingRequest = parkingRequestList.get(request);
+				dailyParking.setEmployeeId(parkingRequest.getEmployeeId());
+				parkingRequest.setAllotedParkingSlotId(dailyParking.getParkingId());
+				dailyParkingRepository.save(dailyParking);
+				parkingRequestRepository.save(parkingRequest);
+				request++;
+			}
+		}
+
 	}
 }

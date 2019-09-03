@@ -16,5 +16,7 @@ import com.ing.parking.entity.DailyParking;
 public interface DailyParkingRepository extends JpaRepository<DailyParking, Integer> {
 
 	public List<DailyParking> findByDailyDate(LocalDate dailyDate);
+	
+	public DailyParking findByEmployeeIdAndDailyDate(int employeeid, LocalDate dailyDate);
 
 }
